@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Testing OAUTH2{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Test OAuth2</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated() %}
+                    <li><a href='/logout'>Logout</a></li>
+                {% else %}
+                    <li><a href='/login'>Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div><!-- End container fluid -->
+</nav> <!-- End navbar-->
+
+{% endblock %}
+{% block content %}
+<div class="container-fluid"a>
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          {% if current_user.is_authenticated() %}
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+            {%endif%}
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+             {% block page_content %}{% endblock %}
+        </div>
+
+    </div><!--end row-->
+</div>
+{% endblock %}
